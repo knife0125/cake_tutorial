@@ -73,4 +73,18 @@
             }
         }
 
+        public function delete($categoryId)
+        {
+            // 削除リクエストが、getメソッドで投げられてきた場合にはエラーを表示
+            if ($this->request->is('get')) {
+                throw new MethodNotAllowedException();
+            }
+
+            // 指定したカテゴリの削除に成功したら、成功メッセージを表示してカテゴリ一覧ページへ遷移
+            if ($this->Category->delete($categoryId)) {
+                $this->Session->setFlash(__('The category with categoryId: %s has been deleted.', h($categoryId)));
+                return $this->redirect(array('action' => 'index'));
+            }
+        }
+
     }

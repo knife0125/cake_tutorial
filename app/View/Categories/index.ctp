@@ -21,6 +21,12 @@ array('controller' => 'categories', 'action' => 'view', $category['Category']['i
         </td>
         <td>
             <?php echo $this->Html->link('Edit', array('action' => 'edit', $category['Category']['id'])); ?>
+            <?php echo $this->Form->postLink(
+                                        'Delete',
+                                        array('action' => 'delete', $category['Category']['id']),
+                                        array('confirm' => 'Are you sure?')
+                       );
+            ?>
         </td>
         <td><?php echo $category['Category']['created']; ?></td>
     </tr>
