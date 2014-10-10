@@ -1,4 +1,7 @@
 <h1>Category List</h1>
+<?php
+    echo $this->Html->link('Add Category', array('controller' => 'categories', 'action' => 'add'));
+?>
 <table>
     <tr>
         <th>Id</th>
