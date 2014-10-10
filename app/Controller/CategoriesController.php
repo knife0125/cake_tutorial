@@ -1,4 +1,5 @@
 <?php
+
     class CategoriesController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
@@ -43,4 +44,33 @@
                 $this->Session->setFlash(__('Unnable to add your post.'));
             }
         }
+
+        public function edit($categoryId = null)
+        {
+            // 編集画面描画時に編集対象のカテゴリのidがなかった場合にはエラーを表示
+            if (!$categoryId) {
+                throw new NotFoundException(__('Invalid post'));
+            }
+
+            // 編集対象のカテゴリの情報をデータベースから取得(データベースに編集対象データがなければエラーを表示)
+            $category = $this->Category->findById($categoryId);
+            if (!$category) {
+                throw new NotFoundException(__('Invalid post'));
+            }
+
+            // リクエストメソッドがpost, putいずれかであれば、カテゴリの更新処理を実行
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Category->categoryId = $categoryId;
+                if ($this->Category->save($this->request->data)) {
+                    $this->Session->setFlash(__('Your category has been updated.'));
+                    return $this->redirect(array('action' => 'index'));
+                }
+                $this->Session->setFlash(__('Unable to update your category.'));
+            }
+
+            if (!$this->request->data) {
+                $this->request->data = $category;
+            }
+        }
+
     }

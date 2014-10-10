@@ -6,6 +6,7 @@
     <tr>
         <th>Id</th>
         <th>Title</th>
+        <th>Action</th>
         <th>Created</th>
     </tr>
 
@@ -17,6 +18,9 @@
         <td>
             <?php echo $this->Html->link($category['Category']['category_name'],
 array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?>
+        </td>
+        <td>
+            <?php echo $this->Html->link('Edit', array('action' => 'edit', $category['Category']['id'])); ?>
         </td>
         <td><?php echo $category['Category']['created']; ?></td>
     </tr>
