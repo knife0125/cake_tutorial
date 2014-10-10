@@ -1,6 +1,7 @@
 <?php
 
     class CategoriesController extends AppController {
+        public $uses = array('Category','Post');
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
 
@@ -26,8 +27,12 @@
                 throw new NotFoundException(__('Invalid category'));
             }
 
+            // カテゴリと紐づくPosts一覧を取得
+            $posts = $this->Post->getPostsWithCategoryId($categoryId);
+
             // 取得したカテゴリの情報をカテゴリの画面に引き渡す
             $this->set('category', $category);
+            $this->set('posts', $posts);
         }
 
         public function add()
