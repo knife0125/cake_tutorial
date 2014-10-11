@@ -17,12 +17,8 @@
         {
             // postsデータの初期化
             $posts = array();
-            // 指定条件の作成
-            $conditions = array(
-                'Category.id' => $categoryId
-            );
-            // 条件を指定してデータを取得
-            $posts = $this->find('all', array('conditions' => $conditions));
+            // データの取得
+            $posts = $this->findById($categoryId);
             return $posts;
         }
     }

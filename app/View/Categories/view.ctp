@@ -1,7 +1,7 @@
 <div>
     <h1>Category Name</h1>
-    <p><strong><?php echo h($category['Category']['category_name']);?></strong>
-    <small>Created: <?php echo $category['Category']['created'];?></small></p>
+    <p><strong><?php echo h($data['Category']['category_name']);?></strong>
+    <small>Created: <?php echo $data['Category']['created'];?></small></p>
 </div>
 <hr />
 <div>
@@ -15,22 +15,22 @@
 
         <!-- ここから、$posts配列をループして、投稿記事の情報を表示 -->
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($data['Post'] as $post): ?>
         <tr>
-            <td><?php echo $post['Post']['id']; ?></td>
+            <td><?php echo $post['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link($post['title'],
+    array('controller' => 'posts', 'action' => 'view', $post['id'])); ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['id'])); ?>
                 <?php echo $this->Form->postLink(
                     'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
+                    array('action' => 'delete', $post['id']),
                     array('confirm' => 'Are you sure?'));
                 ?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td><?php echo $post['created']; ?></td>
         </tr>
         <?php endforeach; ?>
         <?php unset($post); ?>

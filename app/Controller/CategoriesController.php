@@ -28,11 +28,11 @@
             }
 
             // カテゴリと紐づくPosts一覧を取得
-            $posts = $this->Post->getPostsWithCategoryId($categoryId);
+            // $posts = $this->Post->getPostsWithCategoryId($categoryId);
+            $data = $this->Category->getPostsWithCategory($categoryId);
 
             // 取得したカテゴリの情報をカテゴリの画面に引き渡す
-            $this->set('category', $category);
-            $this->set('posts', $posts);
+            $this->set('data', $data);
         }
 
         public function add()
