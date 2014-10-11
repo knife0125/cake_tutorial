@@ -24,10 +24,16 @@
 
             // データベースからデータを取得($conditionsに条件を指定)
             $conditions = array(
-                'Post.category_id' => $categoryId,
-                'order' => array('Post.created ASC')
+                'Post.category_id' => $categoryId
             );
-            $posts = $this->find('all', $conditions);
+            // $orderに並べ替え条件を指定
+            $order = array('Post.created ASC');
+            // 条件、並べ替えパラメータなどを指定してデータを取得
+            $posts = $this->find('all', array(
+                                            'conditions' => $conditions,
+                                            'order' => $order
+                                        )
+                                );
 
             // 取得したデータを返却
             return $posts;
